@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "args": [
+                "--checkpoint", "runs/06b886da-3a62-4cd2-a848-5e55c6730cbd/last_model.ckpt",
+                "--batch_size", "32",
+                "--num_workers", "16"
+            ],
+            "env": {
+                "FASHION_DIR": "${env:FASHION_DIR}"
+            }
+        }
+    ]
+}

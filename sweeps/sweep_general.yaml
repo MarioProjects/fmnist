@@ -1,0 +1,70 @@
+# https://docs.wandb.ai/guides/sweeps
+# https://docs.wandb.ai/guides/sweeps/define-sweep-configuration
+# wandb sweep --project centric-fashion-mnist sweeps/sweep_general.yaml
+# The program to run
+program: train.py
+
+# Method can be grid, random or bayes
+method: random
+
+# Project this sweep is part of
+project: centric-fashion-mnist
+
+# Metric to optimize
+metric:
+  name: metrics/val_f1
+  goal: maximize
+
+# Parameters to sweep over
+parameters:
+  model:
+    values:
+      - 'resnet18'
+  normalization:
+    value: '255'
+  weights:
+    value: 'random'
+  lr:
+    distribution: log_uniform_values
+    min: 1e-5
+    max: 1e-1
+  batch_size:
+    value: 256
+  epochs:
+    value: 30
+  optimizer:
+    value: 'SGD'
+  scheduler:
+    value: 'MultiStepLR'
+  milestones: # The parameter is a list
+    value: '13-35'
+  step_gamma:
+    value: 0.1
+  loss:
+    value: 'cross_entropy'
+  val_size:
+    value: 0.15
+  num_workers:
+    value: 16
+  seed:
+    value: 42
+  p_rotate:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_posterize:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_shift:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_contrast:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_brightness:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_hflip:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_vflip:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_random_crop:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_blur:
+    values: [0, 0.25, 0.5, 0.75, 1]
+  p_dropout:
+    values: [0, 0.25, 0.5, 0.75, 1]
